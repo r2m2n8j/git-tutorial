@@ -1,1 +1,146 @@
 Graph coding hands on.
+
+/***********************************
+
+1. Graphs are 2 kinds First is 1 index and second is 0 index
+What is 1 index? Here Graph is started from 1 index.It means Node is 8 and graph start from 1 to 8.
+In 0 index - If node is 4 than it's start from 0 to 3 only.
+
+
+*** So when we want to represent graph through Adjacency Matrix or Adjacency List. If graph is a 0 index graph than we have to take
+size of matrix is n+1.
+
+
+
+*******************************************/
+
+
+
+
+
+
+/***********************************  Undirected Graph
+    Represent of Adjacency Matrix
+*******************************************/
+
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+		int n = 4;
+		int [][]adjMat = new int[n][n];
+		
+		addEdges(adjMat, 0,1);
+		addEdges(adjMat, 0,2);
+		addEdges(adjMat, 0,3);
+		addEdges(adjMat, 1,2);
+		
+// 		adjMat[0][1] = 1;
+// 		adjMat[1][0] = 1;
+		
+// 		adjMat[1][2] = 1;
+// 		adjMat[2][1] = 1;
+		
+// 		adjMat[0][2] = 1;
+// 		adjMat[2][0] = 1;
+		
+// 		adjMat[0][3] = 1;
+// 		adjMat[3][0] = 1;
+		
+		for(int i=0;i<adjMat.length;i++){
+		    for(int j=0;j<adjMat[i].length;j++){
+		        System.out.print(adjMat[i][j]);
+		    }
+		    System.out.println();
+		}
+	}
+	public static void addEdges(int [][]adjMat, int i, int j){
+	    adjMat[i][j] = 1;
+	    adjMat[j][i] = 1;
+	}
+}
+
+
+
+
+/*****************************
+    Represent of Adjacency List
+*******************************************/
+
+import java.util.ArrayList;
+
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+		ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
+		int n = 4;
+		for(int i=0;i<n;i++){
+		    adjList.add(new ArrayList<>());
+		}
+		
+		addEdges(adjList, 0, 1);
+		addEdges(adjList, 0, 2);
+		addEdges(adjList, 0, 3);
+		addEdges(adjList, 1, 2);
+		
+		for(int i=0;i<adjList.size();i++){
+		    System.out.print(i + " : ");
+		    for(int j = 0;j<adjList.get(i).size();j++){
+		        System.out.print(adjList.get(i).get(j) + " ");
+		    }
+		    System.out.println();
+		}
+	}
+	public static void addEdges(ArrayList<ArrayList<Integer>> adjList, int i, int j){
+	    adjList.get(i).add(j);
+	    adjList.get(j).add(i);
+	}
+}
+
+
+
+
+/*****************************
+Rule of travers 
+Common thing is make a boolean  VISITED_ARRAY 
+
+
+**********************BFS ( BREATH FIRST SEARCH / LEVEL ORDER TRAVERSAL )*********************/
+
+1. We have to create a boolean array for visited Node
+2. Create a Queue
+3. Add first Node in the queue and make a loop while q ISEMPTY.
+4. Try to find neighbour node of first node
+5. Check if node is not visited in visitedArray mark visited and add that node inside the queue.
+
+public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        // code here
+        
+        ArrayList<Integer> al = new ArrayList<>();
+        Queue<Integer> q = new LinkedList<>();
+        boolean []visit = new boolean[V];
+        q.add(0);
+        visit[0] = true;
+        while(q.isEmpty()==false){
+            Integer node = q.poll();
+            al.add(node);
+            
+            for(int i:adj.get(node)){
+                if(visit[i]==false){
+                    visit[i] = true;
+                    q.add(i);
+                }
+            }
+        }
+        return al;
+    }
+
+
+
+
+
+
+
+
+
