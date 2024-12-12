@@ -99,9 +99,52 @@ public class Main
 }
 
 
+/******************************************************************************
+		How to convert Adjacency Matrix to Adjacency List
+*******************************************************************************/
 
 
-/*****************************
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+		int [][]adjMat = {
+		    {0,1,1,1},
+		    {1,0,1,0},
+		    {1,1,0,0},
+		    {1,0,0,0}
+		};
+		List<List<Integer>> adjList = new ArrayList<>();
+		for(int i=0;i<adjMat.length;i++){
+		    ArrayList<Integer> al = new ArrayList<>();
+		    for(int j=0;j<adjMat[i].length;j++){
+		        
+		        if(adjMat[i][j]!=0) al.add(adjMat[i][j]);
+		    }
+		    adjList.add(al);
+		}
+		
+		for(int i=0;i<adjList.size();i++){
+		    System.out.print(i + " : ");
+		    for(int j=0;j<adjList.get(i).size();j++){
+		        System.out.print(adjList.get(i).get(j) + " ");
+		    }
+		    System.out.println();
+		}
+		
+	}
+}
+
+
+
+
+
+
+
+
+/*************************************************************************************************
+
 Rule of travers 
 Common thing is make a boolean  VISITED_ARRAY 
 
@@ -110,9 +153,10 @@ Common thing is make a boolean  VISITED_ARRAY
 
 1. We have to create a boolean array for visited Node
 2. Create a Queue
-3. Add first Node in the queue and make a loop while q ISEMPTY.
-4. Try to find neighbour node of first node
-5. Check if node is not visited in visitedArray mark visited and add that node inside the queue.
+3. Add first Node in the queue and mark it as a visited node visited[node] = true;
+4. Make a loop while q IS_NOT_EMPTY.
+5. Try to find neighbour node of first node
+6. Check if node is not visited in visitedArray mark visited and add that node inside the queue.
 
 public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
         // code here
