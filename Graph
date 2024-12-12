@@ -182,6 +182,45 @@ public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
 
 
 
+/******************************************************************************
+DFS DEPTH FOR SEARCH
+
+1. Make a boolean visited array and size of the array is equals to vertiex
+2. Now call a recursive function(dfs) and provide a source
+
+Here It first go the source and check source's neighbour is visited or not. 
+If not visited go to it's neighbour(It's means one step depth). Again check it's neighbour is visited or not.
+If not visited go to it's neighbout(It's means 2nd step depth). Again check and go ........ If it is visited back to the first source.
+NOW It check 2nd neighbour. and do same ................
+
+
+*******************************************************************************/
+
+
+
+
+class Solution {
+    // Function to return a list containing the DFS traversal of the graph.
+    public ArrayList<Integer> dfsOfGraph(ArrayList<ArrayList<Integer>> adj) {
+        // Code here
+        int v = adj.size();
+        boolean[]visited = new boolean[v];
+        ArrayList<Integer> al = new ArrayList<>();
+        dfs(adj, visited, al, 0);
+        return al;
+    }
+    void dfs(ArrayList<ArrayList<Integer>> adj, boolean []visited, ArrayList<Integer> al, int s){
+        visited[s] = true;
+        al.add(s);
+        for(int node : adj.get(s)){
+            if(visited[node] == false){
+                dfs(adj, visited, al, node);
+            }
+        }
+    }
+}
+
+
 
 
 
