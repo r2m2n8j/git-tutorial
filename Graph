@@ -116,13 +116,15 @@ public class Main
 		    {1,0,0,0}
 		};
 		List<List<Integer>> adjList = new ArrayList<>();
+		int v = adjMat.length;
+		for(int i=0;i<v;i++) adjList.add(new ArrayList<Integer>());
 		for(int i=0;i<adjMat.length;i++){
-		    ArrayList<Integer> al = new ArrayList<>();
 		    for(int j=0;j<adjMat[i].length;j++){
-		        
-		        if(adjMat[i][j]!=0) al.add(adjMat[i][j]);
+		        if(adjMat[i][j]!=0 && i!=j){
+				adjList.get(i).add(j);
+				adjList.get(j).add(i);
+			}
 		    }
-		    adjList.add(al);
 		}
 		
 		for(int i=0;i<adjList.size();i++){
